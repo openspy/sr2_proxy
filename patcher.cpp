@@ -2,11 +2,10 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <assert.h>
-
+#include "main.h"
 void write_string_offset(void *address, int string_len, const char* string) {
-	void* exe_mem_offset = (void*)0x400000;
 
-	void* write_address = (void*)((ptrdiff_t)exe_mem_offset + (ptrdiff_t)address);
+	void* write_address = (void*)((ptrdiff_t)EXE_BASE_ADDRESS + (ptrdiff_t)address);
 	DWORD oldProtect;
 
 	BOOL success = VirtualProtect(write_address, string_len, PAGE_READWRITE, &oldProtect);
